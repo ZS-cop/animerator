@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" href="./Asset/PE.png" />
+    <link rel="stylesheet" href="./css/main.css" />
+
+    <script
+      src="https://kit.fontawesome.com/8213d83771.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Boimator</title>
+  </head>
+  <body>
+    <div class="tools">
+      <div class="buttons">
+        <div class="all_btn">
+          <i class="fa-solid fa-paintbrush btn" id="brush_btn"></i>
+          <p class="msgbtn">Brush (3C)</p>
+        </div>
+        <div class="all_btn">
+          <i class="fa-solid fa-layer-group btn"></i>
+          <p class="msgbtn">Layers</p>
+        </div>
+        <div class="all_btn">
+          <i class="fa-solid fa-gauge btn"></i>          
+          <p class="msgbtn">Fast</p>
+        </div>
+        <div class="all_btn">
+          <i class="fa-solid fa-compass-drafting btn"></i>          
+          <p class="msgbtn">Canvas</p>
+        </div>
+        <div class="all_btn">
+          <i class="fa-solid fa-download btn"></i>          
+          <p class="msgbtn">Download</p>
+        </div>
+        <div class="all_btn">
+          <i class="fa-solid fa-video btn"></i>          
+          <p class="msgbtn">Video</p>
+        </div>
+
+      </div>
+      <div class="toolbox">
+        <div id="brush_tool"><i class="fa-solid fa-angle-left back" id="b_bt"></i>
+        <h1 class="head">Crinkly</h1>
+        <p class="para">Width</p>
+        <input type="range" id="width_p" value="0" class="radio">
+        <p id="get_color" class="btns">Get Color</p>
+        <h1 class="head">Clay</h1>
+        <p class="para">Width</p>
+        <input type="range" id="width_cl" value="0" class="radio">
+        <p class="para">Blur</p>
+        <input type="range" id="blur_cl" value="0" class="radio">
+        <p id="get_colorc" class="btns">Get Color</p>
+        <h1 class="head">Circle</h1>
+        <p class="para">Width</p>
+        <input type="range" id="width_cr" value="0" class="radio" max="10">
+        <p class="para">Spread</p>
+        <input type="range" id="spread_cr" value="0" class="radio">
+        <p id="get_colorcr" class="btns">Get Color</p>
+        <h1 class="head">Erase</h1>
+        <p class="para">Width</p>
+        <input type="range" id="width_e" value="0" class="radio">
+        </div>
+      </div>
+
+      <div>
+        <div class="pop" id="color_picker">
+          <div><input type="text" class="text" placeholder="Color" value="#fff" class="text" id="color_text"></div>
+        </div>
+      </div>
+    </div>
+    <div class="canvases">
+      <canvas id="main_canvas"></canvas>
+    </div>
+
+    <!-- CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+
+    <script src="javascript/main.js"></script>
+  </body>
+</html>
