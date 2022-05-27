@@ -1,4 +1,4 @@
-# Boimator
+# Animerator
 Animator 2d
 
 
