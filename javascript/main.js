@@ -204,10 +204,10 @@ m = [get("#width_cr"), get("#spread_cr")].forEach((ele) => {
 });
 
 document.getElementById("width_e").addEventListener("input", () => {
-  main_canvas.onpointerdown = function (e) {
+  main_canvas.onmousedown = function (e) {
     isDrawing = true;
   };
-  main_canvas.onpointermove = function (e) {
+  main_canvas.onmousemove = function (e) {
     if (isDrawing) {
       main_ctx.clearRect(
         e.clientX,
@@ -217,7 +217,7 @@ document.getElementById("width_e").addEventListener("input", () => {
       );
     }
   };
-  main_canvas.onpointerup = function (e) {
+  main_canvas.onmouseup = function (e) {
     main_ctx.clearRect(
       e.clientX,
       e.clientY,
@@ -226,4 +226,11 @@ document.getElementById("width_e").addEventListener("input", () => {
     );
     isDrawing = false;
   };
+  main_canvas.addEventListener("touchmove", function (e) {
+    const rect = main_canvas.getBoundingClientRect();
+    x = e.touches[0].clientX - rect.left;
+    y = e.touches[0].clientY - rect.top;
+    console.log("Hai");
+    main_ctx.clearRect(x, y, get("#width_e").value, get("#width_e").value);
+  });
 });

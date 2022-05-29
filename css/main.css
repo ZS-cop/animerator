@@ -2,6 +2,7 @@ body {
   display: grid;
   grid-template-columns: 3fr 5fr;
   overflow: hidden;
+  touch-action: none;
 }
 html {
   position: absolute;
@@ -172,7 +173,7 @@ html {
   }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 1024px) and (max-width: 768px) {
   body {
     display: grid;
     grid-template-columns: 3fr 5fr;
