@@ -17,6 +17,13 @@ let get = (element) => {
 let isDrawing;
 
 const main_canvas = get("#main_canvas");
+window.addEventListener("resize", () => {
+  main_canvas.height = window.innerHeight;
+  main_canvas.width = window.innerWidth;
+  main_ctx.beginPath();
+  main_ctx.fillStyle = "rgb(247 245 245)";
+  main_ctx.rect(0, 0, main_canvas.width, main_canvas.height);
+  main_ctx.fill();});
 main_canvas.height = window.innerHeight;
 main_canvas.width = window.innerWidth;
 const main_ctx = main_canvas.getContext("2d");
@@ -29,13 +36,13 @@ main_ctx.fill();
 ct = "none";
 
 let pencil = (el, ctx, color, width) => {
-  el.onmousedown = function (e) {
+  el.onpointerdown = function (e) {
     ctx.beginPath();
     isDrawing = true;
     ctx.lineWidth = width;
     ctx.moveTo(e.clientX, e.clientY);
   };
-  el.onmousemove = function (e) {
+  el.onpointermove = function (e) {
     if (isDrawing) {
       console.log(width, color);
       ctx.strokeStyle = color;
@@ -43,32 +50,13 @@ let pencil = (el, ctx, color, width) => {
       ctx.stroke();
     }
   };
-  el.onmouseup = function () {
+  el.onpointerup = function () {
     isDrawing = false;
   };
-  el.addEventListener("touchstart", function (e) {
-    const rect = el.getBoundingClientRect();
-    x = e.touches[0].clientX - rect.left;
-    y = e.touches[0].clientY - rect.top;
-    console.log("gf")
-    ctx.beginPath();
-    ctx.lineWidth = width;
-    ctx.moveTo(x, y);
-  });
-  el.addEventListener("touchmove", function (e) {
-    const rect = el.getBoundingClientRect();
-    x = e.touches[0].clientX - rect.left;
-    y = e.touches[0].clientY - rect.top;
-    console.log("gf")
-    ctx.beginPath();
-    ctx.fillStyle = color;
-    ctx.rect(x , y , width , width)
-    ctx.fill();
-  });
 };
 
 let Clay = (el, ctx, color, width, blur = 0) => {
-  el.onmousedown = function (e) {
+  el.onpointerdown = function (e) {
     isDrawing = true;
     ctx.lineWidth = width;
     ctx.lineJoin = ctx.lineCap = "round";
@@ -76,7 +64,7 @@ let Clay = (el, ctx, color, width, blur = 0) => {
     ctx.shadowColor = color;
     ctx.moveTo(e.clientX, e.clientY);
   };
-  el.onmousemove = function (e) {
+  el.onpointermove = function (e) {
     if (isDrawing) {
       ctx.beginPath();
       ctx.strokeStyle = color;
@@ -84,35 +72,16 @@ let Clay = (el, ctx, color, width, blur = 0) => {
       ctx.stroke();
     }
   };
-  el.onmouseup = function () {
+  el.onpointerup = function () {
     isDrawing = false;
   };
-  el.addEventListener("touchstart", function (e) {
-    const rect = el.getBoundingClientRect();
-    x = e.touches[0].clientX - rect.left;
-    y = e.touches[0].clientY - rect.top;
-    ctx.lineWidth = width;
-    ctx.lineJoin = ctx.lineCap = "round";
-    ctx.shadowBlur = blur;
-    ctx.shadowColor = color;
-    ctx.moveTo(x, y);
-  });
-  el.addEventListener("touchmove", function (e) {
-    const rect = el.getBoundingClientRect();
-    x = e.touches[0].clientX - rect.left;
-    y = e.touches[0].clientY - rect.top;
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineTo(x, y);
-    ctx.stroke();
-  });
 };
 
 let Circle = (el, ctx, color, width, spread) => {
-  el.onmousedown = function (e) {
+  el.onpointerdown = function (e) {
     isDrawing = true;
   };
-  el.onmousemove = function (e) {
+  el.onpointermove = function (e) {
     if (isDrawing) {
       for (i = 0; i < 4; i++) {
         ctx.beginPath();
@@ -129,27 +98,9 @@ let Circle = (el, ctx, color, width, spread) => {
       }
     }
   };
-  el.onmouseup = function () {
+  el.onpointerup = function () {
     isDrawing = false;
   };
-  el.addEventListener("touchmove", function (e) {
-    const rect = el.getBoundingClientRect();
-    x = e.touches[0].clientX - rect.left;
-    y = e.touches[0].clientY - rect.top;
-    for (i = 0; i < 4; i++) {
-      ctx.beginPath();
-      ctx.fillStyle = color;
-      ctx.globalAlpha = Math.random();
-      ctx.arc(
-        getRandomInt(x, x),
-        getRandomInt(y, y + spread),
-        getRandomInt(width, width + 2),
-        0 * Math.PI,
-        2 * Math.PI
-      );
-      ctx.fill();
-    }
-  });
 };
 
 let click = (btn, box) => {
@@ -253,10 +204,10 @@ m = [get("#width_cr"), get("#spread_cr")].forEach((ele) => {
 });
 
 document.getElementById("width_e").addEventListener("input", () => {
-  main_canvas.onmousedown = function (e) {
+  main_canvas.onpointerdown = function (e) {
     isDrawing = true;
   };
-  main_canvas.onmousemove = function (e) {
+  main_canvas.onpointermove = function (e) {
     if (isDrawing) {
       main_ctx.clearRect(
         e.clientX,
@@ -266,7 +217,7 @@ document.getElementById("width_e").addEventListener("input", () => {
       );
     }
   };
-  main_canvas.onmouseup = function (e) {
+  main_canvas.onpointerup = function (e) {
     main_ctx.clearRect(
       e.clientX,
       e.clientY,
@@ -275,11 +226,4 @@ document.getElementById("width_e").addEventListener("input", () => {
     );
     isDrawing = false;
   };
-  main_canvas.addEventListener("touchmove", function (e) {
-    const rect = main_canvas.getBoundingClientRect();
-    x = e.touches[0].clientX - rect.left;
-    y = e.touches[0].clientY - rect.top;
-    console.log("Hai");
-    main_ctx.clearRect(x, y, get("#width_e").value, get("#width_e").value);
-  });
 });

@@ -150,31 +150,50 @@ html {
   body {
     display: grid;
     grid-template-columns: 3fr 5fr;
-    overflow: scroll;
   }
   .pop {
     position: absolute;
-    left: 50%;
-    top: 5%;
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 800px) {
-  body {
-    display: grid;
-    grid-template-columns: 3fr 5fr;
-    overflow: scroll;
-  }
-  .pop {
-    position: absolute;
-    left: 20%;
-    top: 5%;
+    left: 20rem;
+    top: 2%;
+    transform: scale(0.6 , 0.6);
   }
   .buttons {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.1px;
     height: 100vh;
+  }
+  .all_btn:hover .msgbtn {
+    display: none;
+  }
+  .all_btn {
+    transform: scale(0.5, 0.5);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  body {
+    display: grid;
+    grid-template-columns: 3fr 5fr;
+  }
+  .pop {
+    position: absolute;
+    left: 20rem;
+    top: 2%;
+    transform: scale(0.6 , 0.6);
+  }
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.1px;
+    height: 100vh;
+  }
+  .all_btn:hover .msgbtn {
+    display: none;
+  }
+  .all_btn {
+    transform: scale(0.5, 0.5);
   }
 }
