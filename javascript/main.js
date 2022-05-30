@@ -40,6 +40,7 @@ let pencil = (el, ctx, color, width) => {
     ctx.beginPath();
     isDrawing = true;
     ctx.lineWidth = width;
+    ctx.lineCap = "round";
     ctx.moveTo(e.clientX, e.clientY);
   };
   el.onpointermove = function (e) {
@@ -59,14 +60,15 @@ let Clay = (el, ctx, color, width, blur = 0) => {
   el.onpointerdown = function (e) {
     isDrawing = true;
     ctx.lineWidth = width;
-    ctx.lineJoin = ctx.lineCap = "round";
-    ctx.shadowBlur = blur;
-    ctx.shadowColor = color;
+    ctx.lineCap = "round";
+    ctx.filter = `blur(${blur}px)`;
+    // ctx.shadowColor = color;
     ctx.moveTo(e.clientX, e.clientY);
   };
   el.onpointermove = function (e) {
     if (isDrawing) {
       ctx.beginPath();
+      ctx.filter = `blur(${blur}px)`;
       ctx.strokeStyle = color;
       ctx.lineTo(e.clientX, e.clientY);
       ctx.stroke();
@@ -152,7 +154,7 @@ get("#get_colorcr").addEventListener("click", () => {
   );
 });
 
-get("#width_p").addEventListener("input", () => {
+get("#width_p").addEventListener("change", () => {
   pencil(
     main_canvas,
     main_ctx,
@@ -180,7 +182,7 @@ r = [
   document.getElementById("width_cl"),
   document.getElementById("blur_cl"),
 ].forEach((ele) => {
-  ele.addEventListener("input", () => {
+  ele.addEventListener("change", () => {
     Clay(
       main_canvas,
       main_ctx,
@@ -192,7 +194,7 @@ r = [
 });
 
 m = [get("#width_cr"), get("#spread_cr")].forEach((ele) => {
-  ele.addEventListener("input", () => {
+  ele.addEventListener("change", () => {
     Circle(
       main_canvas,
       main_ctx,

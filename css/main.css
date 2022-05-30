@@ -2,7 +2,6 @@ body {
   display: grid;
   grid-template-columns: 3fr 5fr;
   overflow: hidden;
-  touch-action: none;
 }
 html {
   position: absolute;
@@ -23,6 +22,9 @@ html {
 .head {
   margin-left: 1rem;
   letter-spacing: 0.5rem;
+}
+.canvases{
+  touch-action: none;
 }
 #main_canvas {
   position: absolute;
@@ -173,7 +175,7 @@ html {
   }
 }
 
-@media (min-width: 1024px) and (max-width: 768px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   body {
     display: grid;
     grid-template-columns: 3fr 5fr;
