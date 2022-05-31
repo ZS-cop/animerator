@@ -1,15 +1,24 @@
 body {
   display: grid;
-  grid-template-columns: 3fr 5fr;
   overflow: hidden;
+  grid-template-areas:
+  'header header header header header header'
+  'menu main canvas canvas box box';
+  background-color: rgba(21, 21, 21, 0.951);
 }
+
 html {
   position: absolute;
+}
+
+::placeholder{
+  color: white;
 }
 
 :root {
   --color: #90ee90;
 }
+
 ::-webkit-scrollbar {
   width: 0px;
 }
@@ -23,49 +32,66 @@ html {
   margin-left: 1rem;
   letter-spacing: 0.5rem;
 }
-.canvases{
+
+.canvases {
   touch-action: none;
 }
+
 #main_canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
+  /* position: absolute; */
+  display: grid;
+  /* top: 0; */
+  /* left: 0; */
+  grid-area: canvas; 
   background-image: url("https://static.vecteezy.com/system/resources/thumbnails/003/793/482/small/transparent-grid-pattern-for-background-vector.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 .toolbox div {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(41 41 41 / 50%);
   display: block;
   width: 30vw;
   height: 90vh;
   margin: 1rem;
   z-index: 100;
-  position: absolute;
-  top: 0;
-  left: 0;
   border-radius: 1rem;
+  color: white;
   display: none;
+  backdrop-filter: blur(10px);
   font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
   overflow-y: scroll;
+  grid-area: box; 
 }
+
+.search {
+  outline: none;
+  border: none;
+  height: 2rem;
+  font-size: large;
+  font-family: monospace;
+  margin: 0.5rem;
+  color: white;
+  width: 27.5vw;
+  padding: 0.5rem;
+  background-color: rgb(24, 24, 24);
+  border-radius: 10px;
+}
+
 .radio {
   width: 90%;
   height: 1px;
   margin-left: 1rem;
 }
+
 .pop {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(37, 37, 37);
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   padding: 1rem;
-  margin: 0.5rem;
   position: absolute;
-  left: 60rem;
-  top: 4rem;
-  display: none;
+  left: 6rem;
   z-index: 1000000;
 }
 
@@ -95,16 +121,6 @@ html {
   color: #00563f;
 }
 
-.back {
-  font-size: 2rem;
-  margin: 1rem;
-  cursor: pointer;
-  position: fixed;
-  background-color: white;
-  padding: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  border-radius: 1rem;
-}
 .buttons {
   display: flex;
   flex-direction: column;
@@ -112,10 +128,12 @@ html {
   gap: 1rem;
   height: 100vh;
 }
+
 .all_btn {
   cursor: pointer;
   z-index: 10;
   font-size: larger;
+  grid-area: menu; 
   margin-left: 1rem;
   background-color: transparent;
   transition: all 0.5s ease-in-out;
@@ -123,30 +141,30 @@ html {
 }
 
 .btn {
-  background-color: white;
+  background-color: rgb(41 41 41 / 50%);
   padding: 1rem;
   border-radius: 2rem;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   margin: 10px;
-}
-.msgbtn {
-  cursor: pointer;
-  z-index: 10;
-  font-size: large;
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 1rem;
-  border-radius: 1rem;
-  background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  width: fit-content;
-  display: none;
-  text-align: center;
+  color: white;
 }
 
-.all_btn:hover .msgbtn {
-  display: block;
-  position: relative;
-  top: 0;
+@keyframes borders {
+  10%{
+    border-radius: 20px;
+    background-color: #90ee90;
+  }
+  50%{
+      border-radius: 10px;
+      background-color: #90ee90;
+  }
+}
+
+.btn:hover{
+  animation-name: borders;
+  animation-duration: 3s;
+  background-color: #90ee90;
+  border-radius: 10px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -154,12 +172,14 @@ html {
     display: grid;
     grid-template-columns: 3fr 5fr;
   }
+
   .pop {
     position: absolute;
     left: 20rem;
     top: 2%;
-    transform: scale(0.6 , 0.6);
+    transform: scale(0.6, 0.6);
   }
+
   .buttons {
     display: flex;
     flex-direction: column;
@@ -167,9 +187,11 @@ html {
     gap: 0.1px;
     height: 100vh;
   }
+
   .all_btn:hover .msgbtn {
     display: none;
   }
+
   .all_btn {
     transform: scale(0.5, 0.5);
   }
@@ -180,12 +202,14 @@ html {
     display: grid;
     grid-template-columns: 3fr 5fr;
   }
+
   .pop {
     position: absolute;
     left: 20rem;
     top: 2%;
-    transform: scale(0.6 , 0.6);
+    transform: scale(0.6, 0.6);
   }
+
   .buttons {
     display: flex;
     flex-direction: column;
@@ -193,9 +217,11 @@ html {
     gap: 0.1px;
     height: 100vh;
   }
+
   .all_btn:hover .msgbtn {
     display: none;
   }
+
   .all_btn {
     transform: scale(0.5, 0.5);
   }
